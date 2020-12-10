@@ -1,4 +1,4 @@
-# GTC Exposure - Brainstorm Document
+# GTC Exposure - Brainstorming Document
 
 ## Moodle Overview
 
