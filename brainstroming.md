@@ -7,7 +7,7 @@
   - hurricane (warning)
   - flood (warning)
   
-- temperature risks**
+- temperature risks
   - heatwaves
 - pollution
 
