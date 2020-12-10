@@ -1,13 +1,14 @@
 ## scope
 
 **natural hazards**
-	- buildings
-		- earth quakes
-			- middle of the day and at night
-		- hurricane (warning)
-		- flood (warning)
+- buildings
+  - earth quakes
+    - middle of the day and at night
+  - hurricane (warning)
+  - flood (warning)
+  
 **temperature risks**
-	- heatwaves
+  - heatwaves
 **pollution**
 **pandemic**
 **food security (and water)**
@@ -15,9 +16,9 @@
 ## data
 
 **satellite data at all scales**
-	- transfer information to different scales
+  - transfer information to different scales
 socio-economic data
-  - RMS
+   - RMS
 
 
 ## papers
