@@ -1,5 +1,7 @@
 ## Scope
 
+Moodle Overview: Land cover is to be derived from satellite images and translated to land use and hence economic value using ancillary parameters such as socio-economic parameters (e.g. population characteristics, density, building types), or infrastructure characteristics. More creative measures (e.g. junk indicating the level of upkeep) will also be investigated to address economic value and management status. This topic is supported by Risk Management Solutions Ltd and Willis Research Network as AI4ER Partners. ESA supports both topics.
+
 **Risk-Vunerability-Exposure triangle**
 
 - natural hazards
