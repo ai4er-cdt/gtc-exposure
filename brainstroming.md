@@ -2,7 +2,7 @@
 
 **natural hazards**
 - buildings
-  - earth quakes
+  - earthquakes
     - middle of the day and at night
   - hurricane (warning)
   - flood (warning)
