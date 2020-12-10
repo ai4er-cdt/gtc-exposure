@@ -17,8 +17,9 @@
 
 ## Data
 
-- satellite data at all scales**
+- satellite data at all scales
   - transfer information to different scales
+  - sentinel-2
 - socio-economic data
    - RMS
 
