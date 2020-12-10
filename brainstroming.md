@@ -7,11 +7,11 @@
   - hurricane (warning)
   - flood (warning)
   
-**temperature risks**
+- temperature risks**
   - heatwaves
-**pollution**
+- pollution
 
-**pandemic**
+- pandemic
 
 **food security (and water)**
 
