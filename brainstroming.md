@@ -1,4 +1,4 @@
-## scope
+## Scope
 
 **natural hazards**
 - buildings
@@ -15,7 +15,7 @@
 
 **food security (and water)**
 
-## data
+## Data
 
 **satellite data at all scales**
   - transfer information to different scales
@@ -23,7 +23,7 @@ socio-economic data
    - RMS
 
 
-## papers
+## Papers
 
 building damage- https://www.researchgate.net/publication/343401516_INFRASTRUCTURE_DEGRADATION_AND_POST-DISASTER_DAMAGE_DETECTION_USING_ANOMALY_DETECTING_GENERATIVE_ADVERSARIAL_NETWORKS/fulltext/5f28467aa6fdcccc43a87a98/INFRASTRUCTURE-DEGRADATION-AND-POST-DISASTER-DAMAGE-DETECTION-USING-ANOMALY-DETECTING-GENERATIVE-ADVERSARIAL-NETWORKS.pdf?origin=publication_detail
 
