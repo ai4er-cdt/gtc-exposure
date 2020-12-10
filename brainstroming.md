@@ -1,11 +1,13 @@
 ## Scope
 
-**natural hazards**
-- buildings
-  - earthquakes
-    - middle of the day and at night
-  - hurricane (warning)
-  - flood (warning)
+
+
+- natural hazards
+  - buildings
+    - earthquakes
+      - middle of the day and at night
+    - hurricane (warning)
+    - flood (warning)
   
 - temperature risks
   - heatwaves
