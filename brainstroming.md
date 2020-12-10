@@ -13,7 +13,7 @@
 
 - pandemic
 
-**food security (and water)**
+- food security (and water)
 
 ## Data
 
