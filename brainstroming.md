@@ -17,9 +17,9 @@
 
 ## Data
 
-**satellite data at all scales**
+- satellite data at all scales**
   - transfer information to different scales
-socio-economic data
+- socio-economic data
    - RMS
 
 
