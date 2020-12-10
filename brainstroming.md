@@ -1,11 +1,11 @@
 ## Scope
 
-
+**Risk-Vunerability-Exposure triangle**
 
 - natural hazards
   - buildings
     - earthquakes
-      - middle of the day and at night
+      - different risks middle of the day and at night
     - hurricane (warning)
     - flood (warning)
   
