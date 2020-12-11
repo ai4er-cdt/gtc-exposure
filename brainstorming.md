@@ -26,6 +26,8 @@ Land cover is to be derived from satellite images and translated to land use and
 * Many risks (e.g. food security, climate adaptation) are not insured but could be addressed
    * Disaster risk vs insurance exposure (lots are not insured, better built more likely to be insured)
    * Idea of capturing risk in time-series (last month vs 5 years ago for example) is not what is done currently but is the future of risk assessment
+   
+* Cure for catastrophe book (Robert Muir-Wood, 2016) https://www.amazon.co.uk/Cure-Catastrophe-Manufacturing-Natural-Disasters/dp/1786070057/ref=sr_1_1?crid=1X2HAI4RK2WGS&dchild=1&keywords=the+cure+for+catastrophe&qid=1607684216&sprefix=the+cure+for+ca%2Cstripbooks%2C156&sr=8-1
 
 
 ## Data
@@ -39,17 +41,6 @@ Land cover is to be derived from satellite images and translated to land use and
 - Modelling Exposure Through Earth Observation Routines (METEOR) https://meteor-project.org/data, https://meteor-project.org/documents/AGU_iPosterSessions.pdf page 10
 - Human mobility insights https://www.unacast.com/
 
-
-## Papers
-
-building damage inference- https://www.researchgate.net/publication/343401516_INFRASTRUCTURE_DEGRADATION_AND_POST-DISASTER_DAMAGE_DETECTION_USING_ANOMALY_DETECTING_GENERATIVE_ADVERSARIAL_NETWORKS/fulltext/5f28467aa6fdcccc43a87a98/INFRASTRUCTURE-DEGRADATION-AND-POST-DISASTER-DAMAGE-DETECTION-USING-ANOMALY-DETECTING-GENERATIVE-ADVERSARIAL-NETWORKS.pdf?origin=publication_detail
-
-- super-resolution
-  - https://res.mdpi.com/d_attachment/remotesensing/remotesensing-12-02424/article_deploy/remotesensing-12-02424-v2.pdf
-  - HighRes-net: Recursive Fusion for Multi-Frame Super-Resolution of Satellite Imagery" https://arxiv.org/abs/2002.06460
-
-
-* Cure for catastrophe book (Robert Muir-Wood, 2016) https://www.amazon.co.uk/Cure-Catastrophe-Manufacturing-Natural-Disasters/dp/1786070057/ref=sr_1_1?crid=1X2HAI4RK2WGS&dchild=1&keywords=the+cure+for+catastrophe&qid=1607684216&sprefix=the+cure+for+ca%2Cstripbooks%2C156&sr=8-1
 
 ## Where shall we start?
 * Reproduce some results to get a handle before finding niche?
