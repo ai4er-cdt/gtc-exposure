@@ -41,6 +41,10 @@ Land cover is to be derived from satellite images and translated to land use and
 - Modelling Exposure Through Earth Observation Routines (METEOR) https://meteor-project.org/data, https://meteor-project.org/documents/AGU_iPosterSessions.pdf page 10
 - Human mobility insights https://www.unacast.com/
 
+- Ground data collated here https://www.preventionweb.net/risk/datasets
+- Has good datasets on earthquakes and flooding
+- And socio-economic datasets e.g. GED4GEM (global exposure database for global earthquake model) which has information on populations/buildings and their costs 
+
 
 ## Where shall we start?
 * Reproduce some results to get a handle before finding niche?
