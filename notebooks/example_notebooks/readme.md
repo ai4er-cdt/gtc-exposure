@@ -22,4 +22,7 @@ except:
     os.remove(temp_token_info_path)
     print('''\n Invalid token.  Please make sure that you haven't accidentally added any whitespace to the token, 
     and that you have included any trailing '=' characters in the token. If you're still having issues
-    authenticating, please contact support@descarteslabscom.''')```
+    authenticating, please contact support@descarteslabscom.''') 
+```
+
+Now you can just ```import decarteslabs as dl```.
