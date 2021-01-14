@@ -16,6 +16,11 @@ if not os.path.isdir(venv_dir):
     # Create the virtual environment
     print(f'[INFO] Creating: virtual env at: {venv_dir}')
     virtualenv.create_environment(venv_dir)
+    isbuilt==false
+    
+else:
+    isbuilt==true
+    
 
 
 # Activate the venv, making use of the `activate_this.py` file within the venv.
@@ -24,6 +29,23 @@ exec(open(activate_file).read(), dict(__file__=activate_file))
     
 pip.main(["install", "--prefix", venv_dir, "-r", "requirements.txt", '-q'])
 
+if isbuilt = false:
+    :
+    import descarteslabs as dl; import os
+    token_info_path = dl.client.auth.auth.DEFAULT_TOKEN_INFO_PATH
+    temp_token_info_path = token_info_path + ".tmp"
+    token_info_dir = os.path.dirname(token_info_path); 
+    dl.client.auth.auth.makedirs_if_not_exists(token_info_dir)
+    try: 
+        with open(temp_token_info_path, "w") as f:
+            f.write(dl.client.auth.auth.base64url_decode(input()).decode("utf-8"))
+        print("\n Logged in as {}".format(dl.Auth(token_info_path=temp_token_info_path).payload['name']))
+        os.replace(temp_token_info_path, token_info_path)
+    except:
+        os.remove(temp_token_info_path)
+        print('''\n Invalid token.  Please make sure that you haven't accidentally added any whitespace to the token, 
+        and that you have included any trailing '=' characters in the token. If you're still having issues
+        authenticating, please contact support@descarteslabscom.''')
 
 
 
