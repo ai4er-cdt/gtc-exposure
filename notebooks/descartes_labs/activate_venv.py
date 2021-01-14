@@ -34,7 +34,7 @@ pip.main(["install", "--prefix", venv_dir, "-r", "requirements.txt", '-q'])
 if is_built == False:
     
     print("")
-    print('Please click the IAM link below to to retrive the token and paste into the text field. This will only happen this once to autentice the Jasmin Server with you Descartes Labs Credentials')
+    print('Please click the IAM link below to to retrive the token and paste into the text field. This will only happen this once to autentice the Jasmin Server with your Descartes Labs Credentials')
     
     import descarteslabs as dl; import os
     token_info_path = dl.client.auth.auth.DEFAULT_TOKEN_INFO_PATH
