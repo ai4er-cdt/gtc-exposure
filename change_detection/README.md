@@ -2,6 +2,8 @@
 
 Fully convolutional network architectures for change detection using sentinel-2 images.
 
+Notebook is one of the files - please look at this to see what is going on.
+
 Using OSCD dataset downloadable at https://ieee-dataport.org/open-access/oscd-onera-satellite-change-detection
 
 Drawn from this paper. Some adaptions to try it on a CPU - unsurprisingly this was infeasible even with a tiny training dataset and network. 
