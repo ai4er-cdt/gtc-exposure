@@ -73,8 +73,7 @@ class ReassignedDataset(data.Dataset):
         return len(self.imgs)
 
 
-#def preprocess_features(npdata, pca=256):
-def preprocess_features(npdata, pca=6):
+def preprocess_features(npdata, pca=256):
     """Preprocess an array of features.
     Args:
         npdata (np.array N * ndim): features to preprocess
@@ -377,3 +376,5 @@ class PIC(object):
         if verbose:
             print('pic time: {0:.0f} s'.format(time.time() - end))
         return 0
+
+
