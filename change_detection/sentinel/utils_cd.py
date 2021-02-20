@@ -102,6 +102,7 @@ def generate_tiff_from_polygons(
     start_datetime,
     end_datetime,
     out_folder,
+    newLoc,
     seed=0,
     debugging = False
  ):
@@ -143,6 +144,9 @@ def generate_tiff_from_polygons(
 
     #Get dltiles for bounding box around geojsons
     dltiles = dl.scenes.DLTile.from_shape(shape = aoi_feature, resolution = resolution, tilesize = tilesize, pad = pad)
+    
+    if not newLoc:
+      return dltiles
     
     arrs = []
     trgts = []
@@ -215,7 +219,7 @@ def generate_tiff_from_polygons(
     if debugging: 
         return arrs, trgts
     else:
-        return
+        return dltiles
 
       
 def save_test_results(dset, net, net_name):
