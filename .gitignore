@@ -3,4 +3,4 @@ notebooks/mja_tf/tf_practice.ipynb
 notebooks/mja_tf/.ipynb_checkpoints
 *.png
 *.pkl
-notebooks/mja_tf/UnsupervisedFeatureLearning
+notebooks/mja_tf/UnsupervisedFeatureLearning*
