@@ -25,22 +25,26 @@ def retrieve_image(image_dir, polygon):
     dataframe = pd.DataFrame(columns = columns)
     
     for file in os.listdir(image_dir):
-        if file.endswith('.tiff') or file.endswith('.tif'):
+        if file.endswith('.tiff') or file.endswith('.tif') and file.startswith('tile'):
+            #corrupted file- will look into this
+            if file=='tile_20_12000_6000.tif':
+                pass
+            else:
                 dataset = rasterio.open(image_dir+ file)
-    
-                left= dataset.bounds.left
-                bottom = dataset.bounds.bottom
-                right = dataset.bounds.right
-                top = dataset.bounds.top
 
-                coordinates = transform_bounds(dataset.crs, 'EPSG:4326', left, bottom, right, top)
-                left, bottom, right, top = coordinates
-                Geometry = (Polygon([ [left, top],
-                                      [right, top],
-                                      [right ,bottom],
-                                      [left, bottom]]))
-    
-                dataframe.loc[len(dataframe)]= [file, dataset.count, dataset.width, dataset.height, Geometry]
+            left= dataset.bounds.left
+            bottom = dataset.bounds.bottom
+            right = dataset.bounds.right
+            top = dataset.bounds.top
+
+            coordinates = transform_bounds(dataset.crs, 'EPSG:4326', left, bottom, right, top)
+            left, bottom, right, top = coordinates
+            Geometry = (Polygon([ [left, top],
+                                  [right, top],
+                                  [right ,bottom],
+                                  [left, bottom]]))
+
+            dataframe.loc[len(dataframe)]= [file, dataset.count, dataset.width, dataset.height, Geometry]
     
     interceptions = []
     for i in range(len(dataframe)):
@@ -142,3 +146,10 @@ def split_tiles(path, tile_size):
 
             os.system("rm {}{}".format(path, file))
             count+=1  
+
+
+
+
+
+
+
