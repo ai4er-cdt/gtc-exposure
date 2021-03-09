@@ -5,3 +5,4 @@ notebooks/mja_tf/.ipynb_checkpoints
 *.pkl
 notebooks/mja_tf/UnsupervisedFeatureLearning*
 notebooks/mja_tf/#UnsupervisedFeatureLearning*
+*.xlsx
