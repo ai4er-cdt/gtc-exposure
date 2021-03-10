@@ -27,10 +27,11 @@ def retrieve_image(image_dir, polygon):
     for file in os.listdir(image_dir):
         if file.endswith('.tiff') or file.endswith('.tif') and file.startswith('tile'):
             #corrupted file- will look into this
-            if file=='tile_20_12000_6000.tif':
-                pass
-            else:
+            try:
                 dataset = rasterio.open(image_dir+ file)
+            except:
+                pass
+                
 
             left= dataset.bounds.left
             bottom = dataset.bounds.bottom
