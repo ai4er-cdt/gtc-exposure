@@ -1,4 +1,7 @@
 import os
+import sys
+import numpy as np
+import skimage.exposure as exposure
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 try:
@@ -12,18 +15,22 @@ except ModuleNotFoundError:
     os.system('pip install opencv-python')
 import cv2
 
-base_path = "/home/jovyan/gtc-exposure/cloud_free/cut_images/"
-new_path = "/home/jovyan/gtc-exposure/cloud_free/train_images/jpeg/"
+
+base_path = sys.argv[1]
+new_path = '/'.join(base_path.split('/')[:-2])+"/jpeg/"
 
 os.system('mkdir {}'.format(new_path))
 
-normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                 std=[0.229, 0.224, 0.225])
-
 #convert tiff files to jpg to run on model
 for infile in os.listdir(base_path):
-    print ("file : " + infile)
-    read = tiffile.imread(base_path + infile)
-    read = read[:224,:224]
-    outfile = infile.split('.')[0] + '.jpg'
-    cv2.imwrite(new_path+outfile,read,[int(cv2.IMWRITE_JPEG_QUALITY), 200])
+    if infile.endswith(".tif"):
+        print ("file : " + infile)
+        s2_cloud_free = tiffile.imread(base_path + infile)
+        #remove images on the edges where some of the tile is cut off
+        if s2_cloud_free.min()>= 0.00001: 
+            outfile = infile.split('.')[0] + '.jpg'
+            #normalise images
+            s2_cloud_free_norm = exposure.rescale_intensity(s2_cloud_free,
+                                                            in_range='image',
+                                                            out_range=(0,255)).astype(np.uint8)
+            cv2.imwrite(new_path+outfile,s2_cloud_free_norm,[int(cv2.IMWRITE_JPEG_QUALITY), 200])
