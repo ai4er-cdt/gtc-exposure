@@ -18,22 +18,22 @@ This repository is split according to the structure of the write-up, with separa
 ## 2. Project Structure
 ```
 ├── LICENSE
-├── README.md          <- Main README.
+├── README.md                   <- Main README.
 |
-├── notebooks          <- Jupyter notebooks.
+├── notebooks                   <- Jupyter notebooks.
 │
-├── change_detection   <- code for change detection section.
-│   ├──                <- different subsections of change detection
+├── change_detection            <- code for change detection section.
+│   ├──                         <- different subsections of change detection
 │   │
-│   ├──                <- xxxx
+│   ├──                         <- xxxx
 │   │
-│   ├──                <- xxxx
+│   ├──                         <- xxxx
 |   |
-│   ├──                <- xxxx
+│   ├──                         <- xxxx
 │   │
-│   └──                <- xxxx
+│   └──                         <- xxxx
 │
-└── settlement_segmentation    <- settlement segmentation section
+└── settlement_segmentation     <- settlement segmentation section
 ```
 
 ---
