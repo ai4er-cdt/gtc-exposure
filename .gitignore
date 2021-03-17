@@ -4,5 +4,8 @@ notebooks/mja_tf/.ipynb_checkpoints
 *.png
 *.pkl
 notebooks/mja_tf/UnsupervisedFeatureLearning*
+notebooks/mja_tf/sentinel*
+notebooks/mja_tf/UCM*
 notebooks/mja_tf/#UnsupervisedFeatureLearning*
+notebooks/mja_tf/MaxIt*
 *.xlsx
