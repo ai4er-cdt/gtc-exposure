@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#SBATCH --partition=lotus_gpu
+
+#SBATCH --account=lotus_gpu
+
+#SBATCH --gres=gpu:2 # Request a number of GPUs
+
+#SBATCH --time=20:00:00 # Set a runtime for the job in HH:MM:SS
+
+#SBATCH --mem=64000 # Set the amount of memory for the job in MB.
+
+conda activate /home/users/joycelyn/miniconda3/envs/venv-baseline
+
+srun python submission_to_overlay_polys.py --image /gws/nopw/j04/ai4er/users/jl2182/gtc-exposure/change_detection/xBD/xView2_baseline/inference/test_data/hurricane-matthew_00000010_post_disaster.png --damage /gws/nopw/j04/ai4er/users/jl2182/gtc-exposure/change_detection/xBD/xView2_baseline/model/image_output_path.png --localization /gws/nopw/j04/ai4er/users/jl2182/gtc-exposure/change_detection/xBD/xView2_baseline/model/output_path.png --output /gws/nopw/j04/ai4er/users/jl2182/gtc-exposure/change_detection/xBD/xView2_baseline/overlay_output_to_image/overlay_output_image.png
