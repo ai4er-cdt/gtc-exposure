@@ -19,7 +19,7 @@ except ModuleNotFoundError:
 import rioxarray as rxr
 
 
-def retrieve_image(image_dir, polygon):
+def retrieve_image(image_dir, out_path, polygons):
     
     columns = ['Filename', 'Bands', 'Width', 'Height', 'Coordinates']
     dataframe = pd.DataFrame(columns = columns)
@@ -27,11 +27,11 @@ def retrieve_image(image_dir, polygon):
     for file in os.listdir(image_dir):
         if file.endswith('.tiff') or file.endswith('.tif') and file.startswith('tile'):
             #corrupted file- will look into this
-            if file=='tile_20_12000_6000.tif':
-                pass
-            else:
+            try:
                 dataset = rasterio.open(image_dir+ file)
-
+            except:
+                pass
+                
             left= dataset.bounds.left
             bottom = dataset.bounds.bottom
             right = dataset.bounds.right
@@ -46,110 +46,114 @@ def retrieve_image(image_dir, polygon):
 
             dataframe.loc[len(dataframe)]= [file, dataset.count, dataset.width, dataset.height, Geometry]
     
-    interceptions = []
-    for i in range(len(dataframe)):
-        if dataframe.loc[i]['Coordinates'].intersects(polygon):
-            row = [i for i in dataframe.loc[i]]
-            file = row[0]
-            interceptions.append(file)
-            print('Filename: {} \nBands: {} \nWidth: {} \nHeight: {} \nCoordinates: {}'.format(file,
-                                                                                               row[1],
+    
+    count = 0
+    os.system("mkdir {}".format(out_path))
+    
+    for polygon in polygons:
+        interceptions = []
+        for i in range(len(dataframe)):
+            if dataframe.loc[i]['Coordinates'].intersects(polygon):
+                row = [i for i in dataframe.loc[i]]
+                file = row[0]
+                interceptions.append(file)
+                print('Filename: {} \nBands: {} \nWidth: {} \nHeight: {} \nCoordinates: {}'.format(file,
+                                                                                                   row[1],
                                                                                                row [2],
                                                                                                row[3],
                                                                                                row[4]))
+     
+        project = pyproj.Transformer.from_proj(
+            pyproj.Proj(init='epsg:4326'), # source coordinate system
+            pyproj.Proj(init='epsg:32617'))
+        poly = transform(project.transform, polygon)
+
+
+        schema = {
+            'geometry': 'Polygon',
+            'properties': {'id': 'int'},
+        }
+
+        os.system("mkdir {}".format('poly_shapes'))
+
+        with fiona.open('poly_shapes/'+'poly.shp', 'w', 'ESRI Shapefile', schema) as c:
+            ## If there are multiple geometries, put the "for" loop here
+            c.write({
+                'geometry': mapping(poly),
+                'properties': {'id': 123},
+            })
+
+        aoi = os.path.join('poly_shapes', "poly.shp")
+        poly = gpd.read_file(aoi)
+        with fiona.open(aoi, "r") as shapefile:
+            shapes = [feature["geometry"] for feature in shapefile]
+
+        for file in interceptions:
+            src = rasterio.open(image_dir+ file)
+           
+            try:
+                out_image, out_transform = rasterio.mask.mask(src, shapes, crop=True)
+                out_meta = src.meta
+                out_meta.update({"driver": "GTiff",
+                                 "height": out_image.shape[1],
+                                 "width": out_image.shape[2],
+                                 "transform": out_transform})
+
+                if 'train' in out_path:
+                    name = 'train'
+                else:
+                    name ='test'
+                with rasterio.open('{}{}_image_{}.tif'.format(out_path, name, count), "w", **out_meta) as dest:
+                    dest.write(out_image)
+
+                s2_cloud_free = rxr.open_rasterio('{}{}_image_{}.tif'.format(out_path, name, count), masked=True).squeeze()
+
+                if np.isnan(s2_cloud_free).any()!=True:
+                    os.system("rm {}{}_image_{}.tif".format(out_path, name, count))
+
+                if count==0:
+                    red = out_image[0]/out_image.max()
+                    green = out_image[1]/out_image.max()
+                    blue = out_image[2]/out_image.max()
+                    s2_cloud_free_norm = np.dstack((red, green, blue))
+
+                    plt.figure(figsize=(20,10))
+                    plt.imshow(s2_cloud_free_norm)
+                    plt.show()
+
+                count+=1
+            except:
+                pass
             
-            
-    project = pyproj.Transformer.from_proj(
-        pyproj.Proj(init='epsg:4326'), # source coordinate system
-        pyproj.Proj(init='epsg:32617'))
-    poly = transform(project.transform, polygon)
-            
-
-    schema = {
-        'geometry': 'Polygon',
-        'properties': {'id': 'int'},
-    }
-
-    os.system("mkdir {}".format('poly_shapes'))
-    
-    with fiona.open('poly_shapes/'+'poly.shp', 'w', 'ESRI Shapefile', schema) as c:
-        ## If there are multiple geometries, put the "for" loop here
-        c.write({
-            'geometry': mapping(poly),
-            'properties': {'id': 123},
-        })
-        
-    aoi = os.path.join('poly_shapes', "poly.shp")
-    poly = gpd.read_file(aoi)
-    
-    s2_cloud_free = []
-    for file in interceptions:
-        img = rxr.open_rasterio(image_dir+file, masked=True).squeeze()
-        
-        try:
-            s2_cloud_free.append(img.rio.clip(poly.geometry.apply(mapping)))
-        except:
-            pass
-    
-    return s2_cloud_free
-
-def cut_polygon(in_path, out_path, polygons):
-
-    os.system("mkdir {}".format(out_path))
-    
-    count = 0
-    for polygon in polygons:
-        s2_cloud_free_array = retrieve_image(in_path, polygon)
-
-        for s2_cloud_free in s2_cloud_free_array:
-            with rasterio.open(
-                '{}train_image_{}.tif'.format(out_path, count),
-                'w',
-                driver='GTiff',
-                height=s2_cloud_free.shape[1],
-                width=s2_cloud_free.shape[2],
-                count=s2_cloud_free.shape[0],
-                dtype=s2_cloud_free.dtype,
-                crs='epsg:32617'
-                ) as dst:
-                dst.write(s2_cloud_free)
-
-            if count==0:
-                red = s2_cloud_free[0]/s2_cloud_free.max()
-                green = s2_cloud_free[1]/s2_cloud_free.max()
-                blue = s2_cloud_free[2]/s2_cloud_free.max()
-                s2_cloud_free_norm = np.dstack((red, green, blue))
-
-                plt.figure(figsize=(20,10))
-                plt.imshow(s2_cloud_free_norm)
-                plt.show()
-            count+=1
-        
-    os.system("rm -r {}".format('poly_shapes'))
-    
+        os.system("rm -r {}".format('poly_shapes'))
 
 def split_tiles(path, tile_size):
-    
     count=0
     for file in os.listdir(path):
-        if file.endswith('.tif'):
-        
-            output_filename = 'tile_{}_'.format(count)
-
+        if file.endswith('.tif') and file.startswith('test') or file.startswith('train'):
             tile_size_x, tile_size_y = tile_size, tile_size
 
             ds = gdal.Open(path + file)
-            band = ds.GetRasterBand(1)
-            xsize = band.XSize
-            ysize = band.YSize
+            try:
+                band = ds.GetRasterBand(1)
+                xsize = band.XSize
+                ysize = band.YSize
 
-            for i in range(0, xsize, tile_size_x):
-                for j in range(0, ysize, tile_size_y):
-                    com_string = "gdal_translate -of GTIFF -srcwin " + str(i)+ ", " + str(j) + ", " + str(tile_size_x) + ", " + str(tile_size_y) + " " + str(path) + str(file) + " " + str(path) + str(output_filename) + str(i) + "_" + str(j) + ".tif"
-                    os.system(com_string)
+                if 'train' in path:
+                    name = 'train'
+                else:
+                    name ='test'
+                output_filename = '{}tile_{}_'.format(name,count)
 
-            os.system("rm {}{}".format(path, file))
-            count+=1  
+                for i in range(0, xsize, tile_size_x):
+                    for j in range(0, ysize, tile_size_y):
+                        com_string = "gdal_translate -of GTIFF -srcwin " + str(i)+ ", " + str(j) + ", " + str(tile_size_x) + ", " + str(tile_size_y) + " " + str(path) + str(file) + " " + str(path) + str(output_filename) + str(i) + "_" + str(j) + ".tif"
+                        os.system(com_string)
+
+                os.system("rm {}{}".format(path, file))
+                count+=1
+            except:
+                pass
 
 def polygons():
     # create list of polygons to produce training data
@@ -166,14 +170,6 @@ def polygons():
     [-66.11268471479937,18.466186863057448], 
     [-66.12047384977862,18.465983334610513], 
     [-66.12032364607379,18.469545047573636]]))
-
-    polygons.append(Polygon([[-72.33905729667333,18.587105051612888], 
-    [-72.33910021201757,18.57514562714193], 
-    [-72.32133325950292,18.575023587873503], 
-    [-72.32103285209325,18.587227082230804], 
-    [-72.32089101418691,18.59293111081294], 
-    [-72.33840047463613,18.59293111081294], 
-    [-72.33905729667333,18.587105051612888]]))
 
     polygons.append(Polygon([[-76.81544154191762,17.973422489287763], 
     [-76.79561465287954,17.973259204952388], 
@@ -455,12 +451,103 @@ def polygons():
     
     return polygons
 
+def test_areas():
+    test = []
+    
+    test.append(Polygon([[-77.13783521566255,18.418600041643828], 
+                         [-77.07517881307466,18.418437173802708], 
+                         [-77.0746638289438,18.380321862478468], 
+                         [-77.13869352254731,18.379996054245137], 
+                         [-77.13783521566255,18.418600041643828]]))
+
+    test.append(Polygon([[-72.34347052937672,18.58619943673911], 
+                          [-72.30810828572437,18.58644349918482], 
+                          [-72.30827994710133,18.55528203493343], 
+                          [-72.34321303731129,18.556909406316695], 
+                          [-72.34347052937672,18.58619943673911]]))
+
+
+    test.append(Polygon([[-70.00152048333261,18.46316824984316], 
+                         [-69.97555670006845,18.4635753131738], 
+                         [-69.97594168277088,18.437337401095554], 
+                         [-70.00169088931385,18.437174551000332], 
+                         [-70.00152048333261,18.46316824984316]]))
+
+    test.append(Polygon([[-66.0664389311957,18.447325116984587], 
+                          [-66.06575228568789,18.423385888495915], 
+                          [-66.04026057121035,18.423630183172026], 
+                          [-66.0415480315375,18.4458595457671], 
+                          [-66.06618143913028,18.4449639127564], 
+                          [-66.0664389311957,18.447325116984587]]))
+
+    test.append(Polygon([[-76.81149151220227,17.970649199371998], 
+                        [-76.77999164953137,17.96975111955906], 
+                        [-76.780561259368,17.997712511314443], 
+                        [-76.81231861410433,17.997385987434477], 
+                        [-76.81149151220227,17.970649199371998]]))
+    
+    return test
+
+
+def informal_settlements():
+    informal = []
+
+    informal.append(Polygon([[-77.1178623628689,18.397458368293538], 
+                            [-77.11305584431422,18.397438007321558], 
+                            [-77.10782017231715,18.39782486537758], 
+                            [-77.10408653736842,18.399087238254033], 
+                            [-77.10333551884425,18.394953950684403], 
+                            [-77.10520233631861,18.389028720179283], 
+                            [-77.11726154804957,18.388702928400765], 
+                            [-77.11951460362208,18.393569378980867], 
+                            [-77.1178623628689,18.397458368293538]]))
+
+    informal.append(Polygon([[-72.33905729667333,18.587105051612888], 
+                            [-72.33910021201757,18.57514562714193], 
+                            [-72.32133325950292,18.575023587873503], 
+                            [-72.32103285209325,18.587227082230804], 
+                            [-72.32089101418691,18.59293111081294], 
+                            [-72.33840047463613,18.59293111081294], 
+                            [-72.33905729667333,18.587105051612888]]))
+
+    informal.append(Polygon([[-69.98864896560471,18.45767578823935], 
+                            [-69.98849876189988,18.452892568733045], 
+                            [-69.98341329360764,18.452994340748322], 
+                            [-69.98328454757493,18.454073120401635], 
+                            [-69.9822545793132,18.454154537458894], 
+                            [-69.98229749465744,18.458489939989008], 
+                            [-69.98856313491623,18.45834746371158], 
+                            [-69.98864896560471,18.45767578823935]]))
+
+    informal.append(Polygon([[-66.057148704191,18.433459220520398], 
+                             [-66.05684829678133,18.428492111145008], 
+                             [-66.04993892635896,18.4284513965408], 
+                             [-66.05019641842439,18.43292994520503], 
+                             [-66.05701995815828,18.432767090934, 
+                             ]]))
+
+
+    informal.append(Polygon([[-76.80992497084307,17.989681156780875], 
+                            [-76.80966747877764,17.982007336502964], 
+                            [-76.80061234114336,17.98217061274875], 
+                            [-76.80078400252032,17.98988524319038],
+                            [-76.80992497084307,17.989681156780875]]))
+    
+    
+    ≈.append(Polygon([[-76.80361641524004,17.978047841309895], 
+                            [-76.80348766920733,17.97159816419407], 
+                            [-76.79674996016192,17.971802271509187], 
+                            [-76.79700745222735,17.978211121217566], 
+                            [-76.80361641524004,17.978047841309895]]))
+
+    return informal
+
 
 if __name__ == "__main__":
     
     
-    def split_tiles(path, file_list, tile_size=6000):
-
+    def split_tiles(path, file_list, tile_size=8000):
+       
         count=0
         for url in file_list:
             os.system("cd {} && wget {}".format(path, url))
@@ -472,7 +559,10 @@ if __name__ == "__main__":
             tile_size_x, tile_size_y = tile_size, tile_size
 
             ds = gdal.Open(path + file)
-            band = ds.GetRasterBand(1)
+            try:
+                band = ds.GetRasterBand(1)
+            except:
+                pass
             xsize = band.XSize
             ysize = band.YSize
 
@@ -495,7 +585,7 @@ if __name__ == "__main__":
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000023296-0000000000.tif", 
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000023296-0000023296.tif", 
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000023296-0000046592.tif", 
-"http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000046592-0000000000.tif", 
+"http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000046592-0000000000.tif",
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000046592-0000023296.tif", 
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000046592-0000046592.tif", 
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000069888-0000000000.tif", 
@@ -503,7 +593,7 @@ if __name__ == "__main__":
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/18Q/S2_percentile_30_UTM_437-0000069888-0000046592.tif", 
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/19Q/S2_percentile_30_UTM_438-0000000000-0000000000.tif", 
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/19Q/S2_percentile_30_UTM_438-0000000000-0000023296.tif", 
-"http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/19Q/S2_percentile_30_UTM_438-0000000000-0000046592.tif", 
+"http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/19Q/S2_percentile_30_UTM_438-0000000000-0000046592.tif",      
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/19Q/S2_percentile_30_UTM_438-0000023296-0000000000.tif", 
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/19Q/S2_percentile_30_UTM_438-0000023296-0000023296.tif", 
 "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A/GHS_composite_S2_L1C_2017-2018_GLOBE_R2020A_UTM_10/V1-0/19Q/S2_percentile_30_UTM_438-0000023296-0000046592.tif", 

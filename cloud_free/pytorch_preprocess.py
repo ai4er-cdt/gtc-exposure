@@ -26,11 +26,16 @@ for infile in os.listdir(base_path):
     if infile.endswith(".tif"):
         print ("file : " + infile)
         s2_cloud_free = tiffile.imread(base_path + infile)
-        #remove images on the edges where some of the tile is cut off
-        if s2_cloud_free.min()>= 0.00001: 
-            outfile = infile.split('.')[0] + '.jpg'
-            #normalise images
-            s2_cloud_free_norm = exposure.rescale_intensity(s2_cloud_free,
-                                                            in_range='image',
-                                                            out_range=(0,255)).astype(np.uint8)
+        outfile = infile.split('.')[0] + '.jpg'
+        #normalise images
+        s2_cloud_free_norm = exposure.rescale_intensity(s2_cloud_free,
+                                                        in_range='image',
+                                                        out_range=(0,255)).astype(np.uint8)
+        if 'train' in base_path:
+            rotate  = 4
+            for i in range(rotate):
+                cv2.imwrite(new_path+'{}'.format(i)+outfile,s2_cloud_free_norm,[int(cv2.IMWRITE_JPEG_QUALITY), 200])
+                s2_cloud_free_norm = np.rot90(s2_cloud_free_norm, k=1, axes=(0, 1))
+                    
+        else:
             cv2.imwrite(new_path+outfile,s2_cloud_free_norm,[int(cv2.IMWRITE_JPEG_QUALITY), 200])
