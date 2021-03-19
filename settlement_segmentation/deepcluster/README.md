@@ -1,4 +1,4 @@
-This directory corresponds to the DeepCluster model used for unsupervised settlement classification in the report.
+This directory corresponds to the DeepCluster model used for unsupervised settlement classification in the report. The model is writen using PyTorch.
 
 * The different base CNN models can be found within the ```models``` directory.
 
