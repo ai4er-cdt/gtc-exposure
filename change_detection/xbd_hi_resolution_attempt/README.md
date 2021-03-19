@@ -10,7 +10,7 @@ The dataset presented with this challenge is the xBD dataset, which contains 850
 
 ### The Data Pipeline
 
-The training data was reformated in order to organise images and labels by disaster event in the following way.
+The training data was reformatted in order to organise images and labels by disaster event in the following way.
 ```
 xBD 
  ├── disaster_name_1
