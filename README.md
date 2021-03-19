@@ -21,6 +21,11 @@ This repository is split according to the structure of the write-up, with separa
 ├── README.md                   <- Main README.
 |
 ├── notebooks                   <- Jupyter notebooks.
+│   ├── building_segmentation   <- different subsections of change detection
+│   │
+│   ├── building_segmentation   <- xxxx
+│   │
+│   ├── descartes_labs          <- xxxx
 │
 ├── change_detection            <- code for change detection section.
 │   ├──                         <- different subsections of change detection
@@ -34,6 +39,13 @@ This repository is split according to the structure of the write-up, with separa
 │   └──                         <- xxxx
 │
 └── settlement_segmentation     <- settlement segmentation section
+│   ├── data                    <- xxxx
+│   │
+│   ├── deepcluster             <- xxxx
+│   │
+│   ├── mja                     <- xxxx
+|   |
+│   ├── mja_tf                  <- xxxx
 ```
 
 ---
