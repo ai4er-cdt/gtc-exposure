@@ -1,0 +1,1 @@
+This repositry correponds to the Settlement Segmentation section of the report. Three different methods were used for image segmentation, a Random Forrest model as well as two semi-supervised Deep Learning models.
