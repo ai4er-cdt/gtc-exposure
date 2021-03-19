@@ -3,7 +3,6 @@
 __Table of contents:__  
 1. Introduction
 2. Project structure
-3. xxxx
 
 ## 1. Introduction
 
