@@ -39,7 +39,7 @@ This repository is split according to the structure of the write-up, with separa
 │   └──                         <- xxxx
 │
 ├── settlement_segmentation     <- settlement segmentation section
-│   ├── data                    <- xxxx
+│   ├── data                    <- Sentinel-2, Cloud free Sentinel-2 and geojson production preproduction
 │   │
 │   ├── deepcluster             <- the model as well as training and testing notebooks
 │   │
