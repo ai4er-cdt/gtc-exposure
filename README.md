@@ -1,9 +1,5 @@
 # Repository for the Exposure team of the Guided Team Challange
 
-__Table of contents:__  
-1. Introduction
-2. Project structure
-
 ## 1. Introduction
 
 This repository contains all code written for this challenge.
