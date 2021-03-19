@@ -25,7 +25,7 @@ This repository is split according to the structure of the write-up, with separa
 │   │
 │   ├── building_segmentation   <- xxxx
 │   │
-│   ├── descartes_labs          <- Build vevv to use Descartes Labs in Jasmin Notebook Server
+│   └── descartes_labs          <- Build vevv to use Descartes Labs in Jasmin Notebook Server
 │
 ├── change_detection            <- code for change detection section.
 │   ├──                         <- different subsections of change detection
@@ -45,7 +45,7 @@ This repository is split according to the structure of the write-up, with separa
 │   │
 │   ├── mja                     <- xxxx
 |   |
-│   ├── mja_tf                  <- xxxx
+└── └── mja_tf                  <- xxxx
 ```
 
 ---
