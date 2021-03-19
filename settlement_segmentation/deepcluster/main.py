@@ -1,9 +1,3 @@
-# Copyright (c) 2017-present, Facebook, Inc.
-# All rights reserved.
-#
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-#
 import argparse
 import os
 import pickle
@@ -341,12 +335,3 @@ def compute_features(dataloader, model, N):
 if __name__ == '__main__':
     args = parse_args()
     main(args)
-    
-
-
-
-
-
-
-
-
