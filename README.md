@@ -25,7 +25,7 @@ This repository is split according to the structure of the write-up, with separa
 │   │
 │   ├── building_segmentation   <- xxxx
 │   │
-│   ├── descartes_labs          <- xxxx
+│   ├── descartes_labs          <- Build vevv to use Descartes Labs in Jasmin Notebook Server
 │
 ├── change_detection            <- code for change detection section.
 │   ├──                         <- different subsections of change detection
@@ -38,10 +38,10 @@ This repository is split according to the structure of the write-up, with separa
 │   │
 │   └──                         <- xxxx
 │
-└── settlement_segmentation     <- settlement segmentation section
+├── settlement_segmentation     <- settlement segmentation section
 │   ├── data                    <- xxxx
 │   │
-│   ├── deepcluster             <- xxxx
+│   ├── deepcluster             <- the model as well as training and testing notebooks
 │   │
 │   ├── mja                     <- xxxx
 |   |
