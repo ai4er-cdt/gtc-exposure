@@ -1,0 +1,1 @@
+This directory contains the method for generating image tiles from the Sentine-2 image repsosity, by passing areas of interest as polygons into ```gen_data.ipynb```. To change the dates of interest this can be done by altering ```gen_data.py```
