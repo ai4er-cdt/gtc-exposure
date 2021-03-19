@@ -120,5 +120,6 @@ As long as we can find the post image by replacing pre with post (`s/pre/post/g`
 Sample Call: `./utils/inference.sh -x /path/to/xView2/ -i /path/to/$DISASTER_$IMAGEID_pre_disaster.png -p  /path/to/$DISASTER_$IMAGEID_post_disaster.png -l /path/to/localization_weights.h5 -c /path/to/classification_weights.hdf5 -o /path/to/output/image.png -y`
 
 ### Results
+Results on area of interest (AOI), Haiti in the wake of Hurricane Matthew.
 <img width="1429" alt="Screenshot 2021-03-18 at 19 44 46" src="https://user-images.githubusercontent.com/53935327/111773798-8ad38a00-88a6-11eb-95fb-da0a1431b4e2.png">
 
