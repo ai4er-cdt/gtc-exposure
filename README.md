@@ -23,15 +23,13 @@ This repository is split according to the structure of the write-up, with separa
 │   └── descartes_labs          <- Build vevv to use Descartes Labs in Jasmin Notebook Server
 │
 ├── change_detection            <- code for change detection section.
-│   ├── archive                 <- different subsections of change detection
+│   ├── archive                 <- archive of code for this section
 │   │
 │   ├── deep_change_detection   <- code for the deep learning approach to change detection on Sentinel-2 data. Notebook xx contains code used to carry out training.
 │   │
-│   ├──                         <- xxxx
+│   ├── ratio_method            <- contains code for the ratio method 
 |   |
-│   ├──                         <- xxxx
-│   │
-│   └──                         <- xxxx
+│   ├── xbd_hi_res_attempt      <- code for semantic change detection applied to high resolution data
 │
 ├── settlement_segmentation     <- settlement segmentation section
 │   ├── data                    <- Sentinel-2, Cloud free Sentinel-2 and geojson production preprocessing
