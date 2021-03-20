@@ -23,9 +23,9 @@ This repository is split according to the structure of the write-up, with separa
 │   └── descartes_labs          <- Build vevv to use Descartes Labs in Jasmin Notebook Server
 │
 ├── change_detection            <- code for change detection section.
-│   ├──                         <- different subsections of change detection
+│   ├── archive                 <- different subsections of change detection
 │   │
-│   ├──                         <- xxxx
+│   ├── deep_change_detection   <- code for the deep learning approach to change detection on Sentinel-2 data. Notebook xx contains code used to carry out training.
 │   │
 │   ├──                         <- xxxx
 |   |
