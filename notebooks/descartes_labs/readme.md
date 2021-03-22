@@ -1,4 +1,4 @@
-### Descartes Labs Example Notebooks.
+### Running Descartes Labs packages on Jasmin.
 
 * They are now editable and can be used on your own machine using the ```decarteslabs``` python library and any other required libraries.
 
