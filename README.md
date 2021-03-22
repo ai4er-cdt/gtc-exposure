@@ -1,3 +1,5 @@
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ai4er-cdt/gtc-exposure/HEAD)
+
 # Repository for the Exposure team of the Guided Team Challange
 
 ## 1. Introduction
