@@ -10,3 +10,5 @@ notebooks/mja_tf/#UnsupervisedFeatureLearning*
 notebooks/mja_tf/MaxIt*
 *.xlsx
 *.tiff
+
+*.ipynb_checkpoints
