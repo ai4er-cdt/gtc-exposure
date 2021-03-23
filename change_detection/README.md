@@ -27,7 +27,7 @@ Finally, to show what is possible, given a larger, higher resolution dataset, we
 
 The method was split into two stages, first, building localisation was performed to identify individual buildings, followed by damage classification to assign a level of damage to each building pre- and post-disaster. The model performed well despite encountered limitations, achieving an accuracy of 0.97 and F1 score of 0.40 on the localisation and classification runs respectively.
 
-OSCD dataset downloadable at https://ieee-dataport.org/open-access/oscd-onera-satellite-change-detection
+xBD dataset downloadable at 
 
 ## Directory Structure
 ```
