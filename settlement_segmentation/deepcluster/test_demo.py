@@ -1,4 +1,4 @@
-# will put these in a requirements.txt
+#imports
 import os
 import descarteslabs as dl
 import numpy as np
@@ -31,7 +31,7 @@ import settlement_segmentation.deepcluster.models as models
 
 def inference(DATA, ARCH, LR, K):
     
-    base = '/home/jovyan/gtc-exposure/deepcluster/output/sentinel/'
+    base = '/settlement_segmentation/deepcluster/output/sentinel/'
     outfile= 'lr:{}_k:{}/'.format(LR, K)
     EXP= base+outfile
 
@@ -81,7 +81,7 @@ def inference(DATA, ARCH, LR, K):
             index.append(output.data.cpu().numpy().argmax())
             
             #create dataframe from tif files for test data
-            tif_folder = "/home/jovyan/gtc-exposure/cloud_free/test_tifs/tif/"
+            tif_folder = "/settlement_segmentation/data/cloud_free/test_tifs/tif/"
             file = [i for i in os.listdir(tif_folder) if 'tif' in i][count]
             tif = rasterio.open(tif_folder+file)
             if file.startswith('inf'):
@@ -100,5 +100,29 @@ def inference(DATA, ARCH, LR, K):
             
     #convert dataframe to geopandas dataframe for ease of plotting   
     df = gpd.GeoDataFrame(df, geometry='geometry', crs = 4326)
+    
+    df.plot(df['Cluster'])
+    df.plot(df['Informal'])
+    
+    df.plot(df['Cluster'])
+    plt.xlim([-77.05,-77.15 ])
+    plt.ylim([18.35,18.43])
+    df.plot(df['Informal'])
+    plt.xlim([-77.05,-77.15 ])
+    plt.ylim([18.35,18.43])
+
+    df.plot(df['Cluster'])
+    plt.xlim([-76.85,-76.75])
+    plt.ylim([17.95,18.025])
+    df.plot(df['Informal'])
+    plt.xlim([-76.85,-76.75])
+    plt.ylim([17.95,18.025])
+
+    df.plot(df['Cluster'])
+    plt.xlim([-72.29,-72.350])
+    plt.ylim([18.54,18.59])
+    df.plot(df['Informal'])
+    plt.xlim([-72.29,-72.350])
+    plt.ylim([18.54,18.59])
     
     return df, model
