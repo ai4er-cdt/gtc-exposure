@@ -28,7 +28,7 @@ from descarteslabs.vectors import FeatureCollection, properties as p
 from descarteslabs.workflows import GeoContext, Feature, FeatureCollection
 
 # Custom functions
-from unet import UNet
+from change_detection.ratio_method.unet import UNet
 
 #-------------------------------------------------------#
 
@@ -218,7 +218,6 @@ def plotChange(pv):
       omitMask = Feature(geometry=omit.geometry[0],properties={}).rasterize(value=1) # Mask sea
       detection = dilated.mask(dilated==0).mask(omitMask==1).visualize('Detected Change', checkerboard=False, colormap='plasma', map=pv['m2'])
   else: detection = dilated.mask(dilated==0).visualize('Detected Change', checkerboard=False, colormap='plasma', map=pv['m2'])
-  detection.opacity = 0.7
   
   
 # Load in damage geojson from Copernicus EMS data and plot
