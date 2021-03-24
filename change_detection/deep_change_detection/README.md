@@ -8,3 +8,5 @@ Weights for the trained U-Net model are available in the weights directory.
 Additional loss functions are provided in losses.py.
 
 Example images (including results of the change detection algorithm) can be found in example_images.
+
+The notebook sentinel_cd_pipeline contains code to run the trained model on test locations, using the Descartes Labs platform.
