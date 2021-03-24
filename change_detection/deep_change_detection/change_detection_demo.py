@@ -200,7 +200,7 @@ class ChangeDetectionDataset(Dataset):
         else:
             fname = 'large_test.txt'  # .txt file containing names of cities used for testing, usually just test.txt
         
-#       print(path + fname)
+        #       print(path + fname)
         self.names = read_csv(path + fname).columns
         self.n_imgs = self.names.shape[0]
         
@@ -921,7 +921,7 @@ def test(dset):
 	
 	
 	
-	def save_test_results(dset):
+def save_test_results(dset):
     for name in tqdm(dset.names):
         with warnings.catch_warnings():
             I1, I2, cm = dset.get_img(name)
