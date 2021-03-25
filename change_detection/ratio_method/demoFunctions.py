@@ -32,6 +32,8 @@ from change_detection.ratio_method.unet import UNet
 
 #-------------------------------------------------------#
 
+base = '/change_detection/ratio_method/'
+
 ## Assigning locations and variables
 
 def chooseLocation(): 
@@ -117,12 +119,12 @@ def assignVariables(locationFunc):
   # For locations with Copernicus EMS damage assessments
     if location < 4:
       # Values for default locations
-      allDmgAssess = ["gradings/EMSR246_04ROSEAU_02GRADING_v1_5500_settlements_point_grading.dbf", "gradings/EMSR185_35ABRICOTS_02GRADING_v1_2500_settlements_point_grading.dbf", "gradings/EMSR185_11JEREMIE_02GRADING_MONIT01_v1_4000_settlements_point_grading.dbf", "gradings/EMSR185_09PORTSALUT_02GRADING_v1_5500_settlements_point_grading.dbf"] # Damage assessment database location (.dbf file needs .prj,.shp,.shx in same
-      allDmgFiles = ['RoseauDamage0004g3.geojson','HaitiAbricotsDamage0004g3.geojson','HaitiJeremieDamage0004g3.geojson','HaitiPortSalutDamage0004g3.geojson'] # Damage geojson with building footprints
-      allMaskPoly = ['coastlines/swDominicaOcean.geojson', 'coastlines/swHaitiCoastline.geojson', 'coastlines/swHaitiCoastline.geojson','coastlines/PortSalutCoastline.geojson'] # Geojson file masking feature such as ocean
+      allDmgAssess = [base+"gradings/EMSR246_04ROSEAU_02GRADING_v1_5500_settlements_point_grading.dbf", base+"gradings/EMSR185_35ABRICOTS_02GRADING_v1_2500_settlements_point_grading.dbf", base+"gradings/EMSR185_11JEREMIE_02GRADING_MONIT01_v1_4000_settlements_point_grading.dbf", base+"gradings/EMSR185_09PORTSALUT_02GRADING_v1_5500_settlements_point_grading.dbf"] # Damage assessment database location (.dbf file needs .prj,.shp,.shx in same
+      allDmgFiles = [base+'geojsons/'+'RoseauDamage0004g3.geojson',base+'geojsons/'+'HaitiAbricotsDamage0004g3.geojson',base+'geojsons/'+'HaitiJeremieDamage0004g3.geojson',base+'geojsons/'+'HaitiPortSalutDamage0004g3.geojson'] # Damage geojson with building footprints
+      allMaskPoly = [base+'coastlines/swDominicaOcean.geojson', base+'coastlines/swHaitiCoastline.geojson', base+'coastlines/swHaitiCoastline.geojson',base+'coastlines/PortSalutCoastline.geojson'] # Geojson file masking feature such as ocean
 
       # Assign to dictionary
-      variables['damageAssessment'], variables['damageGeojson'], variables['mask'] = allDmgAssess[location], 'geojsons/'+allDmgFiles[location], allMaskPoly[location]
+      variables['damageAssessment'], variables['damageGeojson'], variables['mask'] = allDmgAssess[location], allDmgFiles[location], allMaskPoly[location]
       variables['grades'] = ['Completely Destroyed','Highly Damaged','Moderately Damaged'] # Options: 'Not Applicable','Negligible to slight damage', 'Moderately Damaged', 'Highly Damaged', 'Completely Destroyed'
       variables['area'] = 0.0004 # Building polygon size in lat/long degrees
     
@@ -222,7 +224,7 @@ def plotChange(pv):
   
 # Load in damage geojson from Copernicus EMS data and plot
 def plotDamages(v,m,bounds=[]):
-  try: settlements = gpd.read_file(v['damageAssessment']).to_crs({'init': 'epsg:4326'})
+  try: settlements = gpd.read_file(os.getcwd()+v['damageAssessment']).to_crs({'init': 'epsg:4326'})
   except: print("Damage file not found.")
   color_dict = {'Not Applicable':'green','Negligible to slight damage':'blue', 'Moderately Damaged':'yellow', 'Highly Damaged':'orange', 'Completely Destroyed':'red'}
 
@@ -314,7 +316,7 @@ def predict_image(dltile_key,ratio,tilesize,bands,v):
   #print("Predict on image for dltile {}".format(dltile_key))
 
   # load model
-  modelName = "models/optimalModel"
+  modelName = os.getcwd()+base+"models/optimalModel"
   model = load_model(modelName)
 
   # get imagery

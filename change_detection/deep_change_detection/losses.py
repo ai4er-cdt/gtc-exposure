@@ -7,6 +7,8 @@ import torch
 from torch.autograd import Variable
 import torch.nn.functional as F
 import numpy as np
+import torch.nn as nn
+import os
 
 try:
     from itertools import ifilterfalse
@@ -15,6 +17,7 @@ except ImportError:  # py3k
 
 
 eps = 0
+weights = os.getcwd()+'/change_detection/deep_change_detection/'+'unet_final_weights.pth.tar'
 
 def dice_round(preds, trues):
     preds = preds.float()

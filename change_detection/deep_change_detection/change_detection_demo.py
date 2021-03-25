@@ -4,7 +4,6 @@ import random
 from skimage import io
 from scipy.ndimage import zoom
 import matplotlib.pyplot as plt
-%matplotlib inline
 from tqdm import tqdm as tqdm
 from pandas import read_csv
 from math import floor, ceil, sqrt, exp
@@ -311,7 +310,6 @@ class RandomRot(object):
             label = torch.from_numpy(label)
 
         return {'I1': I1, 'I2': I2, 'label': label}
-			
 			
 class Unet(nn.Module):
 
