@@ -10,5 +10,10 @@ notebooks/mja_tf/#UnsupervisedFeatureLearning*
 notebooks/mja_tf/MaxIt*
 *.xlsx
 *.tiff
-
+settlement_segmentation/deepcluster/output/*
+*.jpg
 *.ipynb_checkpoints
+settlement_segmentation/data/cloud_free/test*
+settlement_segmentation/data/cloud_free/train*
+*.zip
+
