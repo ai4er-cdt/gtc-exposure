@@ -220,6 +220,9 @@ def plotChange(pv):
   else: detection = dilated.mask(dilated==0).visualize('Detected Change', checkerboard=False, colormap='plasma', map=pv['m2'])
   detection.opacity = 0.7
   
+  pv['detections'], pv['omitMask'] = dilated, omitMask
+  
+  return pv 
   
 # Load in damage geojson from Copernicus EMS data and plot
 def plotDamages(v,m,bounds=[]):
@@ -269,7 +272,8 @@ def thresholding(v):
   print('Run box below to display updated detection result')
 
   # Plot detected change
-  plotChange({'slider':slider,'log_ratio':log_ratio,'mask':v['mask'],'kernel':kernel,'m2':m2})
+  plotVars = {'slider':slider,'log_ratio':log_ratio,'mask':v['mask'],'kernel':kernel,'m2':m2}
+  plotVars = plotChange(plotVars)
 
   
   if 'damageAssessment' in v: m2 = plotDamages(v, m2)
@@ -278,7 +282,7 @@ def thresholding(v):
       l2 = LegendControl({"Detected Change":"#FFFF00","Damage Recorded":"#FF0000"}) if 'damageAssessment' in v else LegendControl({"Detected Change":"#FFFF00"})
       m2.add_control(l2)
   
-  return {'slider':slider,'log_ratio':log_ratio,'mask':v['mask'],'kernel':kernel,'m2':m2}
+  return plotVars
 
 
 #-----------------------------------------------------------#
@@ -393,9 +397,3 @@ def classifyDamage(testPoly, v, m3):
   if not 'l3' in globals(): # Add legend if forming map for first time
     l3 = LegendControl({"Detected Change":"#FFFF00", "Damage Recorded":"#FF0000", "Search Area":"#0000FF"}) if 'damageAssessment' in v else LegendControl({"Detected Change":"#FFFF00", "Search Area":"#0000FF"})
     m3.add_control(l3)
-    
-  
-  
-  
-          
-  
