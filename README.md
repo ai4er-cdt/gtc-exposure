@@ -1,6 +1,6 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ai4er-cdt/gtc-exposure/HEAD)
 
-[![ESA](https://www.google.com/url?sa=i&url=https%3A%2F%2Fbrand.esa.int%2Fassets%2Flogo%2F&psig=AOvVaw3c8-NFFHfkmZ1FqfZxHyZl&ust=1616859435252000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMD2j_Wkzu8CFQAAAAAdAAAAABAD)]
+![ESA](https://www.google.com/url?sa=i&url=https%3A%2F%2Fbrand.esa.int%2Fassets%2Flogo%2F&psig=AOvVaw3c8-NFFHfkmZ1FqfZxHyZl&ust=1616859435252000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMD2j_Wkzu8CFQAAAAAdAAAAABAD)
 
 # Repository for the Exposure team of the Guided Team Challenge
 
