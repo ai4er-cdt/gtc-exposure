@@ -16,4 +16,8 @@ settlement_segmentation/deepcluster/output/*
 settlement_segmentation/data/cloud_free/test*
 settlement_segmentation/data/cloud_free/train*
 *.zip
-
+change_detection/ratio_method/coastlines/*
+change_detection/ratio_method/geojsons/*
+change_detection/ratio_method/gradings/*
+change_detection/ratio_method/models/*
+change_detection/ratio_method/records/*

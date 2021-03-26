@@ -37,7 +37,7 @@ xBD dataset downloadable at https://xview2.org/dataset
 │   ├── example_images           <- Example images for testing
 │   ├── weights                  <- Weights files from trained models
 │   ├── cd_dl_notebook.ipynb     <- Deep learning approach notebook
-|   ├── sentinel_cd_pipeline     <- Pipeline to apply trained deep learning model to any pair of Sentinel-2 images
+|   └── sentinel_cd_pipeline     <- Pipeline to apply trained deep learning model to any pair of Sentinel-2 images
 │   
 ├── ratio_method                 <- Code for the ratio method with thresholding and U-Net classifier notebooks
 │   ├── coastlines               <- Geojsons for ocean masking used in thresholding
@@ -45,6 +45,7 @@ xBD dataset downloadable at https://xview2.org/dataset
 │   ├── gradings                 <- Copernicus EMS bulding damage assessments
 │   ├── models                   <- Trained model weights for unet_classifier
 │   ├── records                  <- Satellite imagery patches corresponding to building footprints
+│   ├── image_ratio_demo.ipynb   <- Demo notebook showing methods for image ratio section
 │   ├── thresholding.ipynb       <- Thresholding Method notebook
 │   └── unet_classifier.ipynb    <- U-Net Classification notebook
 |
