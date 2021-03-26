@@ -32,7 +32,7 @@ from descarteslabs.vectors import FeatureCollection, properties as p
 from descarteslabs.workflows import GeoContext, Feature, FeatureCollection
 
 # Custom functions
-from unet import UNet
+#from unet import UNet
 
 #-------------------------------------------------------#
 
