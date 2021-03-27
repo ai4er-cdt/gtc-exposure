@@ -4,7 +4,7 @@ This directory contains code for a deep learning approach to change detection on
 
 To experiment with training the model further, possible loss functions are provided in losses.py, including Lovasz and Dice loss functions.
 
-The notebook sentinel_cd_pipeline contains code to run the trained model on test locations, using the Descartes Labs platform, while the folder demo contains .py files containing the functions for the demo, which draws on the sentinel_cd_pipeline notebook. A full demo will be available at https://www.bas.ac.uk/project/ai4eoaccelerator/exposure/ shortly.
+The notebook sentinel_cd_pipeline contains code to run the trained model on test locations worldwide, using the Descartes Labs platform to source the Sentinel-2 imagery, while the folder demo contains .py files containing the functions for the demo, which draws on the sentinel_cd_pipeline notebook. A full demo will be available at https://www.bas.ac.uk/project/ai4eoaccelerator/exposure/ shortly.
 
 Example images (including results of the change detection algorithm) can be found in example_images.
 
