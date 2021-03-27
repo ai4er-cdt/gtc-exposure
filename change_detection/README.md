@@ -36,6 +36,7 @@ xBD dataset downloadable at https://xview2.org/dataset
 ├── deep_change_detection        <- Code for the deep learning approach to change detection on Sentinel-2 data.
 │   ├── example_images           <- Example images for testing
 │   ├── weights                  <- Weights files from trained models
+│   ├── demo                     <- Code for the interactive demo, with functions drawn from the sentinel_cd_pipeline notebook
 │   ├── cd_dl_notebook.ipynb     <- Deep learning approach notebook
 |   └── sentinel_cd_pipeline     <- Pipeline to apply trained deep learning model to any pair of Sentinel-2 images
 │   
