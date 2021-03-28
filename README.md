@@ -22,9 +22,9 @@ This repository is split according to the structure of the write-up, with separa
 │   │
 │   ├── deepcluster             <- DeepCluster model as well as training and testing notebooks
 │   │
-│   ├── liunsupervised          
+│   ├── liunsupervised          <- Unsupervised feature learning - model building, training, testing          
 |   |
-|   └── randomforest            
+|   └── randomforest            <- RF Classifier training + testing
 |
 ├── change_detection            <- Change detection section.
 │   ├── archive                 <- Archive of old code for this section
