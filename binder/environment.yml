@@ -1,0 +1,11 @@
+name: exposure
+channels:
+  - conda-forge
+  - defaults
+  - pytorch
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - -r file:requirements.txt
+
