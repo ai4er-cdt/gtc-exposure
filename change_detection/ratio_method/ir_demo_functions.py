@@ -38,6 +38,8 @@ from descarteslabs.workflows import GeoContext, Feature, FeatureCollection
 
 ## Initialisation - Assigning locations and variables
 
+base = os.getcwd()+ '/change_detection/ratio_method/'
+
 # Function for location dropdown list
 def chooseLocation(): 
   return ipywidgets.Dropdown(placeholder='Choose Location', 
@@ -131,16 +133,16 @@ def assignVariables(locationFunc):
     if location < 4:
       # Values for default locations
       # Damage assessment database location (.dbf file needs .prj,.shp,.shx in same directory)
-      allDmgAssess = ["gradings/EMSR246_04ROSEAU_02GRADING_v1_5500_settlements_point_grading.dbf",
-                      "gradings/EMSR185_35ABRICOTS_02GRADING_v1_2500_settlements_point_grading.dbf", 
-                      "gradings/EMSR185_11JEREMIE_02GRADING_MONIT01_v1_4000_settlements_point_grading.dbf",
-                      "gradings/EMSR185_09PORTSALUT_02GRADING_v1_5500_settlements_point_grading.dbf"] 
+      allDmgAssess = [base + "gradings/EMSR246_04ROSEAU_02GRADING_v1_5500_settlements_point_grading.dbf",
+                      base + "gradings/EMSR185_35ABRICOTS_02GRADING_v1_2500_settlements_point_grading.dbf", 
+                      base + "gradings/EMSR185_11JEREMIE_02GRADING_MONIT01_v1_4000_settlements_point_grading.dbf",
+                      base + "gradings/EMSR185_09PORTSALUT_02GRADING_v1_5500_settlements_point_grading.dbf"] 
       # Damage geojson with building footprints
-      allDmgFiles = ['RoseauDamage0004g3.geojson','HaitiAbricotsDamage0004g3.geojson',
-                     'HaitiJeremieDamage0004g3.geojson','HaitiPortSalutDamage0004g3.geojson'] 
+      allDmgFiles = [base + 'RoseauDamage0004g3.geojson','HaitiAbricotsDamage0004g3.geojson',
+                     base + 'HaitiJeremieDamage0004g3.geojson','HaitiPortSalutDamage0004g3.geojson'] 
       # Geojson file masking feature such as ocean
-      allMaskPoly = ['coastlines/swDominicaOcean.geojson', 'coastlines/swHaitiCoastline.geojson', 
-                     'coastlines/swHaitiCoastline.geojson','coastlines/PortSalutCoastline.geojson'] 
+      allMaskPoly = ['coastlines/swDominicaOcean.geojson', base + 'coastlines/swHaitiCoastline.geojson', 
+                     base + 'coastlines/swHaitiCoastline.geojson','coastlines/PortSalutCoastline.geojson'] 
 
       # Assign to dictionary
       variables['damageAssessment'], variables['damageGeojson'], variables['mask'] = allDmgAssess[location], 'geojsons/'+allDmgFiles[location], allMaskPoly[location]
@@ -342,7 +344,7 @@ def get_sentinel_image(dltile_key, bands,v):
 # Function running predict image for each tile
 def predict_image(dltile_key,ratio,tilesize,bands,v):
   # load model
-  modelName = "models/optimalModel" # Change here if using own model
+  modelName = base+"models/optimalModel" # Change here if using own model
   model = load_model(modelName)
   # get imagery
   im = get_ratio_image(dltile_key,ratio,tilesize,bands,v)
