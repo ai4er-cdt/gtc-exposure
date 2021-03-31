@@ -43,7 +43,7 @@ from torch.autograd import Variable
 import torchvision.transforms as tr
 
 # Models
-from models.unet import Unet
+from change_detection.deep_change_detection.demo.models.unet import Unet
 # from siamunet_conc import SiamUnet_conc
 # from siamunet_diff import SiamUnet_diff
 # from fresunet import FresUNet
@@ -53,22 +53,26 @@ from models.unet import Unet
 print('PyTorch version',torch.__version__,'. If below 1.6.0 you may need to restart kernel.')
 
 # import custom functions from utils file
-from utils_cd import generate_tiff_from_polygons, save_test_results, test
+from change_detection.deep_change_detection.demo.utils_cd import generate_tiff_from_polygons, save_test_results, test
 
 print('IMPORTS OK')
+
+base_dir = os.getcwd()+'/change_detection/deep_change_detection/'
 
 def assign_all_variables():
     # Variables
     # Define data origin
     locName = 'killick' # File name for area
-    lat, long = 18.5113, -72.2974 # Lat/Long for center of area of interest
+    lat, long = 18.5113, -72.2936 # Lat/Long for center of area of interest
     mzoom = 16 # Zoom for interactive map
     newLocation = True # Will create new geojson and tiff files
 
     # Data labelling
     gjData = False # Location of gdb data (False if no labels, path to file if labels)
-    dmgAss = "/home/jovyan/gtc-exposure/change_detection/geojsons/"+locName+"Damage.geojson" # Location of geojson (created if newLocation True)
-    area, defArea = 0.0002, 0.0005 # area is radius in lat/long around point label to be considered, defArea is for the case of no labels and defines area box size
+    dmgAss = base_dir+ 'demo/geojsons/' +locName+"Damage.geojson" # Location of geojson (created if newLocation True)
+    if newLocation == True:
+        os.system('mkdir {} && touch {}'.format(base_dir+ 'demo/geojsons/', dmgAss))
+    area, defArea = 0.001, 0.0025 # area is radius in lat/long around point label to be considered, defArea is for the case of no labels and defines area box size
 
     # Imagery variables
     imgColl, cloudFraction = "sentinel-2:L1C", 0.1 # Image collection and thrshold for cloud cover
@@ -81,29 +85,31 @@ def assign_all_variables():
     bands = types[bandNum]
     
     # Data storage
-    dataPath = "/home/jovyan/OSCD/new/" # Path to save location for generated images
+    dataPath = base_dir +"demo/new/" # Path to save location for generated images
 
     # Model specifications
     LOAD_TRAINED = True # Load models (instead of re-training)
     newTest = True # False - Add to test files, True - Only test on current area
     TYPE = bandNum # Model type ~ band number
-    modelWeights = '/home/jovyan/gtc-exposure/change_detection/weights/net_final.pth.tar' # Weights file from best trained model (ask Seb for latest)
-    PATH_TO_TRAIN = '/home/jovyan/gtc-exposure/change_detection/OSCD/onera/' # Path to downloaded training data - will look to remove need for this
+    modelWeights = base_dir+'weights/unet_final_weights.pth.tar' # Weights file from best trained model (ask Seb for latest)
+    PATH_TO_TRAIN = base_dir+ 'demo/OSCD/onera/' # Path to downloaded training data - will look to remove need for this
     FP_MODIFIER = 1 # Tuning parameter, use 1 if unsure
     PATCH_SIDE = 32
     BATCH_SIZE, NORMALISE_IMGS, TRAIN_STRIDE, DATA_AUG = 8, True, int(PATCH_SIDE/2) - 1, False
     
-    return (locName, lat, long, mzoom, newLocation, gjData, dmgAss, area, defArea, imgColl, cloudFraction, bandNum, imgNum, img_st, img_end,
-            tifResolution, tifTilesize, tifPad, types, bands, dataPath, LOAD_TRAINED, newTest, TYPE, modelWeights, 
-            PATH_TO_TRAIN, FP_MODIFIER, PATCH_SIDE, BATCH_SIZE, NORMALISE_IMGS, TRAIN_STRIDE, DATA_AUG)
+    return locName, lat, long, mzoom, newLocation, gjData, dmgAss, area, defArea, imgColl, cloudFraction, bandNum, imgNum, img_st, img_end, tifResolution, tifTilesize, tifPad, types, bands, dataPath, LOAD_TRAINED, newTest, TYPE, modelWeights, PATH_TO_TRAIN, FP_MODIFIER, PATCH_SIDE, BATCH_SIZE, NORMALISE_IMGS, TRAIN_STRIDE, DATA_AUG
 
-(locName, lat, long, mzoom, newLocation, gjData, dmgAss, area, defArea, imgColl, cloudFraction, bandNum, imgNum, img_st, img_end,
-tifResolution, tifTilesize, tifPad, types, bands, dataPath, LOAD_TRAINED, newTest, TYPE, modelWeights, 
-PATH_TO_TRAIN, FP_MODIFIER, PATCH_SIDE, BATCH_SIZE, NORMALISE_IMGS, TRAIN_STRIDE, DATA_AUG) = assign_all_variables()
+locName, lat, long, mzoom, newLocation, gjData, dmgAss, area, defArea, imgColl, cloudFraction, bandNum, imgNum, img_st, img_end, tifResolution, tifTilesize, tifPad, types, bands, dataPath, LOAD_TRAINED, newTest, TYPE, modelWeights, PATH_TO_TRAIN, FP_MODIFIER, PATCH_SIDE, BATCH_SIZE, NORMALISE_IMGS, TRAIN_STRIDE, DATA_AUG = assign_all_variables()
             
 def make_polygon():
     features = []
     poly = Polygon([[long-defArea, lat-defArea], [long+defArea, lat-defArea], [long+defArea, lat+defArea], [long-defArea, lat+defArea], [long-defArea, lat-defArea]])
+    #to line up with other tiles in the demo
+    poly = Polygon([[-72.28405213680702,18.514949071981608], 
+                    [-72.28394484844642,18.50711528191177], 
+                    [-72.30164742794472,18.50697986162461], 
+                    [-72.30176130442698,18.51506553158718], 
+                    [-72.28405213680702,18.514949071981608]])
     features.append(geojson.Feature(properties={},geometry=poly))
     fc = geojson.FeatureCollection(features)
     with open(dmgAss, 'w') as f:
@@ -496,7 +502,48 @@ def load_and_run_model():
     save_test_results(new_dataset, net, net_name)
     t_end = time.time()
     #print('Elapsed time: {}'.format(t_end - t_start))
-        
+
     results = test(new_dataset, net, criterion)
     print('Check out imagery results')  
+
+#run functions
+def run_model():
+    make_polygon()
+    generate_tiffs_separate_bands()
+    load_and_run_model()
+    
+    output_dir = str(os.getcwd()+'/change_detection/deep_change_detection/demo'+'/results/')
+
+    import sys
+    from PIL import Image
+
+    images = [Image.open(output_dir+x) for x in os.listdir(output_dir) if 'png' in x]
+    widths, heights = zip(*(i.size for i in images))
+
+    total_width = sum(widths)
+    max_height = max(heights)
+
+    new_im = Image.new('RGB', (total_width, max_height))
+
+    x_offset = 0
+    for im in images:
+        new_im.paste(im, (x_offset,0))
+        x_offset += im.size[0]
+
+    new_im.save(output_dir+ 'output.png')
+    
+    return str(os.getcwd()+'/change_detection/deep_change_detection/demo'+'/results/')
+
+
+def display_results(output):
+    img = mpimg.imread(output+str([file for file in os.listdir(output) if 'output' in file][0]))
+    sentinel_2 = mpimg.imread(os.getcwd()+'/exposure_quantification/GHS_S2_Haiti.png')
+    resultsFig, resultsAx = plt.subplots(1,2, figsize = (30,30))
+    resultsAx[0].imshow(sentinel_2)
+    resultsAx[0].title.set_text('Sentinel RGB')
+    resultsAx[1].imshow(img)
+    resultsAx[1].title.set_text('Change')
+    
+
+
          
