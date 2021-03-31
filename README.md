@@ -1,4 +1,4 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ai4er-cdt/gtc-exposure/binder?urlpath=https%3A%2F%2Fgithub.com%2Fai4er-cdt%2Fgtc-exposure%2Fblob%2Fmain%2FDemo_Notebook.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ai4er-cdt/gtc-exposure/binder?filepath=https%3A%2F%2Fgithub.com%2Fai4er-cdt%2Fgtc-exposure%2Fblob%2Fbinder%2FDemo_Notebook.ipynb)
 
 <img width="100" alt="Cam logo" src=https://www.hoart.cam.ac.uk/images/university-of-cambridge-logo/image_preview>      <img width="100" alt="ESA logo" src="https://brand.esa.int/files/2020/05/ESA_logo_2020_Deep-scaled.jpg">        <img width="100" alt="RMS logo" src=https://www.burstorm.com/wp-content/uploads/RMS-logo-final.png>     <img width="100" alt="WTW logo" src=http://www.wtw-healthandbenefits.co.uk/wp-content/themes/pmi/images/oglogo.png>         <img width="100" alt="DL logo" src=https://i1.wp.com/roboticulized.com/wp-content/uploads/2020/03/descartes-labs-unveils-its-advanced-mineral-exploration-package.png>
 
