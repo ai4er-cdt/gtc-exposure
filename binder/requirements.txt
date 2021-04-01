@@ -24,7 +24,6 @@ chroma-py==0.1.0.dev1
 click==7.1.2
 click-plugins==1.1.1
 cligj==0.7.1
-cloudpickle==0.4.0
 colour==0.1.5
 conda==4.3.16
 coverage==5.5
