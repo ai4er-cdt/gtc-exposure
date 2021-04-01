@@ -39,7 +39,6 @@ folium==0.10.0
 gast==0.3.3
 geojson==2.5.0
 geopandas==0.5.1
-gmpy2==2.1.0b1
 google-api-core==1.26.3
 google-auth==1.28.0
 google-auth-oauthlib==0.4.4
