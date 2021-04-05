@@ -12,6 +12,7 @@ folium==0.10.0
 geojson==2.5.0
 geopandas==0.5.1
 h5netcdf==0.7.4
+ipyleaflet==0.13.6
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
 numpy==1.18.5
