@@ -6,6 +6,7 @@ channels:
 dependencies:
   - python=3.8
   - cudatoolkit=10.1
+  - geopandas=0.8.1
   - gdal
   - pip
   - pip:
