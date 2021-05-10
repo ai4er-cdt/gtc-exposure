@@ -15,6 +15,8 @@ imagecodecs==2021.3.31
 ipyleaflet==0.13.6
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
+markdown==2.4.0
+mercantile==1.2.1
 numpy==1.18.5
 plotly==4.1.1
 rasterio==1.0.26

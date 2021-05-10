@@ -6,4 +6,7 @@ sh ./binder/download_demo_data.sh
 
 jupyter lab clean
 
+jupyter labextension install jupyter-leaflet @jupyter-widgets/jupyterlab-manager
+jupyter nbextension enable --py --sys-prefix ipyleaflet
+
 
