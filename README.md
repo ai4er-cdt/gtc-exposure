@@ -4,7 +4,7 @@
 
 # Repository for the Exposure Team of the Guided Team Challenge
 
-## 1. Overview
+## 1. Overview 
 
 This repository contains all code written for this challenge.
 
