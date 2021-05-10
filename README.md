@@ -1,6 +1,6 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://hub.gke2.mybinder.org/user/ai4er-cdt-gtc-exposure-gloir469/notebooks/Demo_Notebook.ipynb)
 
-<img width="100" alt="Cam logo" src=https://en.wikipedia.org/wiki/Coat_of_arms_of_the_University_of_Cambridge#/media/File:University_of_Cambridge_coat_of_arms.svg>      <img width="100" alt="ESA logo" src="https://brand.esa.int/files/2020/05/ESA_logo_2020_Deep-scaled.jpg">        <img width="100" alt="RMS logo" src=https://www.burstorm.com/wp-content/uploads/RMS-logo-final.png>     <img width="100" alt="WTW logo" src=http://www.wtw-healthandbenefits.co.uk/wp-content/themes/pmi/images/oglogo.png>         <img width="100" alt="DL logo" src=https://i1.wp.com/roboticulized.com/wp-content/uploads/2020/03/descartes-labs-unveils-its-advanced-mineral-exploration-package.png>
+<img width="100" alt="Cam logo" src= https://seeklogo.com/images/U/university-of-cambridge-logo-E6ED593FBF-seeklogo.com.png >      <img width="100" alt="ESA logo" src="https://brand.esa.int/files/2020/05/ESA_logo_2020_Deep-scaled.jpg">        <img width="100" alt="RMS logo" src=https://www.burstorm.com/wp-content/uploads/RMS-logo-final.png>     <img width="100" alt="WTW logo" src=http://www.wtw-healthandbenefits.co.uk/wp-content/themes/pmi/images/oglogo.png>         <img width="100" alt="DL logo" src=https://i1.wp.com/roboticulized.com/wp-content/uploads/2020/03/descartes-labs-unveils-its-advanced-mineral-exploration-package.png>
 
 # Repository for the Exposure Team of the Guided Team Challenge
 
