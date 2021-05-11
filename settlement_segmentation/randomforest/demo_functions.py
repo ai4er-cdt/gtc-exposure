@@ -19,7 +19,9 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import f1_score, make_scorer, jaccard_score
 
 
-def classify(variables, model_loc):
+def classify(variables):
+    
+    model_loc = 'killick_classifier.pkl'
     
     base = os.getcwd()+'/settlement_segmentation/randomforest/'
     model_loc = base + model_loc
@@ -29,7 +31,7 @@ def classify(variables, model_loc):
         return
     else:
         model = pickle.load(open(model_loc, 'rb'))
-        X_raster = tifffile.imread(base+ 'image_0.tiff')
+        X_raster = tifffile.imread(base+ 'killick_val.tiff')
         X_data = X_raster.reshape((X_raster.shape[0]*X_raster.shape[1], X_raster.shape[2]), order='F')
         X_data = (X_data/np.max(X_data))*(255)
         

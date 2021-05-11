@@ -50,12 +50,8 @@ from change_detection.deep_change_detection.demo.models.unet import Unet
 # from smallunet import SmallUnet
 # from smallunet_attempt import Unet
 
-print('PyTorch version',torch.__version__,'. If below 1.6.0 you may need to restart kernel.')
-
 # import custom functions from utils file
 from change_detection.deep_change_detection.demo.utils_cd import generate_tiff_from_polygons, save_test_results, test
-
-print('IMPORTS OK')
 
 base_dir = os.getcwd()+'/change_detection/deep_change_detection/'
 
@@ -92,7 +88,7 @@ def assign_all_variables():
     newTest = True # False - Add to test files, True - Only test on current area
     TYPE = bandNum # Model type ~ band number
     modelWeights = base_dir+'weights/unet_final_weights.pth.tar' # Weights file from best trained model (ask Seb for latest)
-    PATH_TO_TRAIN = base_dir+ 'demo/OSCD/onera/' # Path to downloaded training data - will look to remove need for this
+    PATH_TO_TRAIN = base_dir+ 'demo/new/' # Path to downloaded training data - will look to remove need for this
     FP_MODIFIER = 1 # Tuning parameter, use 1 if unsure
     PATCH_SIDE = 32
     BATCH_SIZE, NORMALISE_IMGS, TRAIN_STRIDE, DATA_AUG = 8, True, int(PATCH_SIDE/2) - 1, False
