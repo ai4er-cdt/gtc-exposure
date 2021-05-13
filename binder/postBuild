@@ -2,7 +2,6 @@
 
 set -ex
 
-chmod +x binder/download_demo_data.sh
 sh ./binder/download_demo_data.sh
 
 jupyter lab clean
