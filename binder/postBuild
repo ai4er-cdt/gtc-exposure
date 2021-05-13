@@ -35,4 +35,4 @@ jupyter nbextension enable --py --sys-prefix ipyleaflet
 pip install numpy
 pip install tensorflow
 pip install descarteslabs
-pip install torch
+pip install torch 
