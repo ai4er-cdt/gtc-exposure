@@ -2,18 +2,12 @@
 
 set -ex
 
-pwd
-
-ls
-
-pip3 install -r /binder/requirements.txt
+pip3 install -r binder/requirements.txt
 
 jupyter lab clean
 
 jupyter labextension install jupyter-leaflet @jupyter-widgets/jupyterlab-manager
 jupyter nbextension enable --py --sys-prefix ipyleaflet
-
-cd gtc-exposure
 
 # # # Download Data # # #
 
