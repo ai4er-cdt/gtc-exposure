@@ -17,10 +17,10 @@ wget -O settlement_segmentation/randomforest/killick_classifier.pkl "https://dri
 
 ### Exposure Quantification ###
 
-wget -O exposure_quantification/GHS_png.zip "https://drive.google.com/uc?export=download&id=1WTohi_XZrJXyHzKVueKee-S3QJLtMocK"
-unzip exposure_quantification/GHS_png.zip
-
-rm exposure_quantification/GHS_png.zip
+wget -O GHS_png.zip "https://drive.google.com/uc?export=download&id=1WTohi_XZrJXyHzKVueKee-S3QJLtMocK"
+unzip GHS_png.zip
+rm GHS_png.zip
+mv GHS_png exposure_quantification/
 
 
 ### Install dependencies ###
