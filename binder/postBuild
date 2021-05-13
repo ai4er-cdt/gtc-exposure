@@ -4,21 +4,22 @@ set -ex
 
 pwd
 
-pip3 install -r requirements.txt
+pip3 install -r /binder/requirements.txt
 
 jupyter lab clean
 
 jupyter labextension install jupyter-leaflet @jupyter-widgets/jupyterlab-manager
 jupyter nbextension enable --py --sys-prefix ipyleaflet
 
+cd gtc-exposure
 
 # # # Download Data # # #
 
 ### Settlement Segmentation ###
 # Random Forrest Classifier
 
-wget -O ../settlement_segmentation/randomforest/killick_val.tiff "https://drive.google.com/uc?export=download&id=1sjnERn_H-4TvRJ_ffRkIoc79tKNkEAV2"
-wget -O ../settlement_segmentation/randomforest/killick_classifier.pkl "https://drive.google.com/uc?export=download&id=1D3y9odtvpVRx-ZTCq2L8aHydPETAp2LD"
+wget -O settlement_segmentation/randomforest/killick_val.tiff "https://drive.google.com/uc?export=download&id=1sjnERn_H-4TvRJ_ffRkIoc79tKNkEAV2"
+wget -O settlement_segmentation/randomforest/killick_classifier.pkl "https://drive.google.com/uc?export=download&id=1D3y9odtvpVRx-ZTCq2L8aHydPETAp2LD"
 
 
 ### Change Detection ###
@@ -27,39 +28,39 @@ wget -O ../settlement_segmentation/randomforest/killick_classifier.pkl "https://
 pip install gdown
 
 # results
-gdown -O ../change_detection/ratio_method/download_data/results.zip "https://drive.google.com/uc?export=download&id=18AngZi11uDFjNRYlM0kSdUPRB5Q0O8_v"
-unzip ../change_detection/ratio_method/download_data/results.zip
-rm ../change_detection/ratio_method/download_data/results.zip
+gdown -O change_detection/ratio_method/download_data/results.zip "https://drive.google.com/uc?export=download&id=18AngZi11uDFjNRYlM0kSdUPRB5Q0O8_v"
+unzip change_detection/ratio_method/download_data/results.zip
+rm change_detection/ratio_method/download_data/results.zip
 
 # records
-gdown -O ../change_detection/ratio_method/download_data/records.zip "https://drive.google.com/uc?export=download&id=1PoXkx9sf5Aiw6HYIetTGFTrgy_JPOWb0"
-unzip ../change_detection/ratio_method/download_data/records.zip
-rm ../change_detection/ratio_method/download_data/records.zip
+gdown -O change_detection/ratio_method/download_data/records.zip "https://drive.google.com/uc?export=download&id=1PoXkx9sf5Aiw6HYIetTGFTrgy_JPOWb0"
+unzip change_detection/ratio_method/download_data/records.zip
+rm change_detection/ratio_method/download_data/records.zip
 
 # models
-gdown -O ../change_detection/ratio_method/download_data/models.zip "https://drive.google.com/uc?export=download&id=18wdEMvBKjXdM8zB2kD9VRU2KO3v4ouBR"
-unzip ../change_detection/ratio_method/download_data/models.zip
-rm ../change_detection/ratio_method/download_data/models.zip
+gdown -O change_detection/ratio_method/download_data/models.zip "https://drive.google.com/uc?export=download&id=18wdEMvBKjXdM8zB2kD9VRU2KO3v4ouBR"
+unzip change_detection/ratio_method/download_data/models.zip
+rm change_detection/ratio_method/download_data/models.zip
 
 # gradings
-gdown -O ../change_detection/ratio_method/download_data/gradings.zip "https://drive.google.com/uc?export=download&id=14gH7lV6nGoaN4GQjzIwFVDT84J6QEMiT"
-unzip ../change_detection/ratio_method/download_data/gradings.zip
-rm ../change_detection/ratio_method/download_data/gradings.zip
+gdown -O change_detection/ratio_method/download_data/gradings.zip "https://drive.google.com/uc?export=download&id=14gH7lV6nGoaN4GQjzIwFVDT84J6QEMiT"
+unzip change_detection/ratio_method/download_data/gradings.zip
+rm change_detection/ratio_method/download_data/gradings.zip
 
 # geojsons
-gdown -O ../change_detection/ratio_method/download_data/geojsons.zip "https://drive.google.com/uc?export=download&id=1ZDzQKo37f51ZC2uRVjT8YNSusaNODRol"
-unzip ../change_detection/ratio_method/download_data/geojsons.zip
-rm ../change_detection/ratio_method/download_data/geojsons.zip
+gdown -O change_detection/ratio_method/download_data/geojsons.zip "https://drive.google.com/uc?export=download&id=1ZDzQKo37f51ZC2uRVjT8YNSusaNODRol"
+unzip change_detection/ratio_method/download_data/geojsons.zip
+rm change_detection/ratio_method/download_data/geojsons.zip
 
 # coastlines
-gdown -O ../change_detection/ratio_method/download_data/coastlines.zip "https://drive.google.com/uc?export=download&id=1fx_WeWbRmSn9gWC8fuWAIUksaIQLay6u"
-unzip ../change_detection/ratio_method/download_data/coastlines.zip
-rm ../change_detection/ratio_method/download_data/coastlines.zip
+gdown -O change_detection/ratio_method/download_data/coastlines.zip "https://drive.google.com/uc?export=download&id=1fx_WeWbRmSn9gWC8fuWAIUksaIQLay6u"
+unzip change_detection/ratio_method/download_data/coastlines.zip
+rm change_detection/ratio_method/download_data/coastlines.zip
 
 
 ### Exposure Quantification ###
 
-wget -O ../exposure_quantification/GHS_png.zip "https://drive.google.com/uc?export=download&id=1WTohi_XZrJXyHzKVueKee-S3QJLtMocK"
-unzip ../exposure_quantification/GHS_png.zip
+wget -O exposure_quantification/GHS_png.zip "https://drive.google.com/uc?export=download&id=1WTohi_XZrJXyHzKVueKee-S3QJLtMocK"
+unzip exposure_quantification/GHS_png.zip
 
-rm ../exposure_quantification/GHS_png.zip
+rm exposure_quantification/GHS_png.zip
