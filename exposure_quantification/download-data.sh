@@ -1,6 +1,8 @@
 #!/bin/bash
 
-wget -O GHS_png.zip "https://drive.google.com/uc?export=download&id=1WTohi_XZrJXyHzKVueKee-S3QJLtMocK"
-unzip GHS_png.zip
+pwd='../exposure_quantification'
 
-rm GHS_png.zip
+wget -O $(pwd)/GHS_png.zip "https://drive.google.com/uc?export=download&id=1WTohi_XZrJXyHzKVueKee-S3QJLtMocK"
+unzip $(pwd)/GHS_png.zip
+
+rm $(pwd)/GHS_png.zip
