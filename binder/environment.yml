@@ -1,4 +1,4 @@
-name: binder
+name: exposure
 channels:
   - conda-forge
   - defaults
