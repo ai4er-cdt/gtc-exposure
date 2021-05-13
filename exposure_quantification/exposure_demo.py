@@ -10,7 +10,7 @@ def exposure_quantification():
     zoom = 16
     bounds =((18.504317897,-72.309451052),(18.523663424,-72.274449289))
     
-    base = 'files/gtc-exposure/exposure_quantification/'
+    base = 'files/exposure_quantification/'
 
     m = Map(basemap=basemaps.OpenStreetMap.Mapnik, center=center, zoom=zoom)
     m.add_control(ScaleControl(position='bottomleft'))
