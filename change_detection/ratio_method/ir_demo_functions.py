@@ -40,6 +40,11 @@ from descarteslabs.workflows import GeoContext, Feature, FeatureCollection
 
 base = os.getcwd()+ '/change_detection/ratio_method/'
 
+def download_data():
+    os.system('chmod +x change_detection/ratio_method/download_data.sh')
+    os.system('./change_detection/ratio_method/download_data.sh')
+
+
 # Function for location dropdown list
 def chooseLocation(): 
   return ipywidgets.Dropdown(placeholder='Choose Location', 
@@ -51,7 +56,8 @@ def chooseLocation():
                                  disabled=False)
 
 # Having chosen a location from the dropdown list, this function will assign its specified variables
-def assignVariables(locationFunc):
+def assignVariables(locationFunc): 
+  download_data()
   location = locationFunc.value # Get location choice
 
   # If 'New location' has been chosen then we supply a text box into which the user can enter their variable values
@@ -188,14 +194,9 @@ def submitNewLocation(variables, updates):
 
 ## 1 - Visualise Imagery
 
-
-def download_data():
-    os.system('chmod +x change_detection/ratio_method/download_data.sh')
-    os.system('./change_detection/ratio_method/download_data.sh')
-
 # Function using GetImage to retrieve imagery for chosen before-after dates
 def beforeAfterImages(variables):
-  download_data()
+
   m1 = wf.interactive.MapApp()
   m1.center, m1.zoom = (variables['latitude'], variables['longitude']), variables['zoom']
   
