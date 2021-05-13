@@ -188,8 +188,14 @@ def submitNewLocation(variables, updates):
 
 ## 1 - Visualise Imagery
 
+
+def download_data():
+    os.system('chmod +x change_detection/ratio_method/download_data.sh')
+    os.system('./change_detection/ratio_method/download_data.sh')
+
 # Function using GetImage to retrieve imagery for chosen before-after dates
 def beforeAfterImages(variables):
+  download_data()
   m1 = wf.interactive.MapApp()
   m1.center, m1.zoom = (variables['latitude'], variables['longitude']), variables['zoom']
   
@@ -606,7 +612,4 @@ def classifierAccuracy(cl, v):
   return m5
 
 
-def download_data():
-    os.system('chmod +x change_detection/ratio_method/download_data.sh')
-    os.system('./change_detection/ratio_method/download_data.sh')
 #--------------END------------------#
