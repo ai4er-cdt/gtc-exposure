@@ -4,6 +4,8 @@ set -ex
 
 pwd
 
+ls
+
 pip3 install -r /binder/requirements.txt
 
 jupyter lab clean
