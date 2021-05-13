@@ -48,7 +48,7 @@ mv results change_detection/ratio_method/results
 
 # records
 gdown -O records.zip "https://drive.google.com/uc?export=download&id=1PoXkx9sf5Aiw6HYIetTGFTrgy_JPOWb0"
-unzip change_detection/ratio_method/download_data/records.zip
+unzip records.zip
 rm records.zip
 mv records change_detection/ratio_method/records
 
