@@ -57,7 +57,6 @@ def chooseLocation():
 
 # Having chosen a location from the dropdown list, this function will assign its specified variables
 def assignVariables(locationFunc): 
-  download_data()
   location = locationFunc.value # Get location choice
 
   # If 'New location' has been chosen then we supply a text box into which the user can enter their variable values
