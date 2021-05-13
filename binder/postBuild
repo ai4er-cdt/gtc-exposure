@@ -22,6 +22,7 @@ wget -O settlement_segmentation/randomforest/killick_classifier.pkl "https://dri
 # Ratio Method
 
 pip install gdown
+pip install numpy
 
 # results
 gdown -O change_detection/ratio_method/download_data/results.zip "https://drive.google.com/uc?export=download&id=18AngZi11uDFjNRYlM0kSdUPRB5Q0O8_v"
