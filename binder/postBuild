@@ -15,6 +15,8 @@ wget -O settlement_segmentation/randomforest/killick_classifier.pkl "https://dri
 # Ratio Method
 
 # results
+mkdir change_detection/ratio_method/download_data/
+
 wget -O change_detection/ratio_method/download_data/results.zip "https://drive.google.com/uc?export=download&id=18AngZi11uDFjNRYlM0kSdUPRB5Q0O8_v"
 unzip change_detection/ratio_method/download_data/results.zip
 rm change_detection/ratio_method/download_data/results.zip
