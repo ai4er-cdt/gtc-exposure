@@ -105,8 +105,7 @@ termcolor==1.1.0
 terminado==0.9.5
 testpath==0.4.4
 threadpoolctl==2.1.0
-tifffile==2021.4.8
-torch==1.8.1
+tifffile==2021.4.81
 tornado== 6.1
 tqdm==4.60.0
 traitlets==5.0.5
