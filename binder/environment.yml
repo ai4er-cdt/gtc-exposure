@@ -12,4 +12,6 @@ dependencies:
   - ipykernel
   - ipywidgets
   - ipyleaflet
+  - pip:
+    - -r file:requirements.txt
 prefix: /opt/conda/envs/binder
