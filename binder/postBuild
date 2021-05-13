@@ -2,13 +2,6 @@
 
 set -ex
 
-pip3 install -r binder/requirements.txt
-
-jupyter lab clean
-
-jupyter labextension install jupyter-leaflet @jupyter-widgets/jupyterlab-manager
-jupyter nbextension enable --py --sys-prefix ipyleaflet
-
 # # # Download Data # # #
 
 ### Settlement Segmentation ###
@@ -20,10 +13,6 @@ wget -O settlement_segmentation/randomforest/killick_classifier.pkl "https://dri
 
 ### Change Detection ###
 # Ratio Method
-
-pip install numpy
-pip install tensorflow
-pip install descarteslabs
 
 # results
 wget -O change_detection/ratio_method/download_data/results.zip "https://drive.google.com/uc?export=download&id=18AngZi11uDFjNRYlM0kSdUPRB5Q0O8_v"
@@ -62,3 +51,17 @@ wget -O exposure_quantification/GHS_png.zip "https://drive.google.com/uc?export=
 unzip exposure_quantification/GHS_png.zip
 
 rm exposure_quantification/GHS_png.zip
+
+
+### Install dependencies ###
+
+pip3 install -r binder/requirements.txt
+
+jupyter lab clean
+
+jupyter labextension install jupyter-leaflet @jupyter-widgets/jupyterlab-manager
+jupyter nbextension enable --py --sys-prefix ipyleaflet
+
+pip install numpy
+pip install tensorflow
+pip install descarteslabs
