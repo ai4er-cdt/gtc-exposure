@@ -605,4 +605,8 @@ def classifierAccuracy(cl, v):
 
   return m5
 
+
+def download_data():
+    os.system('chmod +x change_detection/ratio_method/download_data.sh')
+    os.system('./change_detection/ratio_method/download_data.sh')
 #--------------END------------------#
