@@ -2,9 +2,20 @@
 
 set -ex
 
-sh ./binder/download_demo_data.sh
-
 jupyter lab clean
 
 jupyter labextension install jupyter-leaflet @jupyter-widgets/jupyterlab-manager
 jupyter nbextension enable --py --sys-prefix ipyleaflet
+
+# # # Download Data # # #
+
+### Settlement Segmentation ###
+# Random Forrest Classifier
+sh ./../settlement_segmentation/randomforest/download-demo-data.sh
+
+### Change Detection ###
+# Ratio Method
+sh ./../change_detection/ratio_method/download_data.sh
+
+### Exposure Quantification ###
+sh ./../exposure_quantification/download-data.sh
